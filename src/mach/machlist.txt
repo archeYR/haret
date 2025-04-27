@@ -119,7 +119,12 @@ H3600a,     SA      ,Compaq iPAQ H3600,           H3600
 PLATFORM=SmartPhone
 Tornado,    OMAP850 ,Vodafone v1240,              OMAP_TORNADO
 Libra,      MSM7500 ,LIBR100
+SGH_i600,   OMAP850 ,SGH-i600,                    SGH_I600
 
 PLATFORM=PLATFORM_TYPE
 E4430,      S3c2440 ,MDPNAE443X2TR01,             E4430, \
         set ramsize 64*1024*1024
+n40,        S3c2440 ,N40,                         N40
+
+PLATFORM=LD2416
+lark_430,    S3c2416 ,"lark_freebird_430 ",        LD2416

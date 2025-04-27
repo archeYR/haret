@@ -3178,6 +3178,9 @@ extern unsigned int __machine_arch_type;
 #define MACH_TYPE_TOP9000_SU           3195
 #define MACH_TYPE_UTM300               3196
 #define MACH_TYPE_TSUNAGI              3197
+#define MACH_TYPE_LD2416               5158
+#define MACH_TYPE_N40                  5159
+#define MACH_TYPE_SGH_I600             5160
 
 #ifdef CONFIG_ARCH_EBSA110
 # ifdef machine_arch_type
@@ -41169,6 +41172,42 @@ extern unsigned int __machine_arch_type;
 # define machine_is_tsunagi()	(machine_arch_type == MACH_TYPE_TSUNAGI)
 #else
 # define machine_is_tsunagi()	(0)
+#endif
+
+#ifdef CONFIG_MACH_LD2416
+# ifdef machine_arch_type
+#  undef machine_arch_type
+#  define machine_arch_type	__machine_arch_type
+# else
+#  define machine_arch_type	MACH_TYPE_LD2416
+# endif
+# define machine_is_ld2416()	(machine_arch_type == MACH_TYPE_LD2416)
+#else
+# define machine_is_ld2416()	(0)
+#endif
+
+#ifdef CONFIG_MACH_N40
+# ifdef machine_arch_type
+#  undef machine_arch_type
+#  define machine_arch_type	__machine_arch_type
+# else
+#  define machine_arch_type	MACH_TYPE_N40
+# endif
+# define machine_is_n40()	(machine_arch_type == MACH_TYPE_N40)
+#else
+# define machine_is_n40()	(0)
+#endif
+
+#ifdef CONFIG_MACH_SGH_I600
+# ifdef machine_arch_type
+#  undef machine_arch_type
+#  define machine_arch_type	__machine_arch_type
+# else
+#  define machine_arch_type	MACH_TYPE_SGH_I600
+# endif
+# define machine_is_sgh_i600()	(machine_arch_type == MACH_TYPE_SGH_I600)
+#else
+# define machine_is_sgh_i600()	(0)
 #endif
 
 /*

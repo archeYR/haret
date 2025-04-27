@@ -17,6 +17,15 @@ class MachineS3c2440 : public MachineS3c2442 {
 };
 class MachineS3c2410 : public MachineS3c2442 {
 };
+class MachineS3c2416 : public Machine {
+public:
+    MachineS3c2416();
+    void init();
+    int preHardwareShutdown(struct fbinfo *fbi);
+    void hardwareShutdown(struct fbinfo *fbi);
+
+    uint32 *channels, *uhcmap;
+};
 int testS3C24xx();
 
 //--------------------------------------------------------

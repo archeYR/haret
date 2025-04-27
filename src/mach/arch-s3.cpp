@@ -14,8 +14,8 @@ MachineS3c2442::MachineS3c2442()
     CPUInfo[0] = L"SC32442";
 }
 
-void
-MachineS3c2442::init()
+static void
+s3c24xxinit()
 {
     runMemScript(
         "set ramaddr 0x30000000\n"
@@ -52,6 +52,12 @@ MachineS3c2442::init()
         "addlist CLOCKS p2v(0x4C000014)\n" // CLKDIVN
         "addlist CLOCKS p2v(0x4C000018)\n" // CAMDIVN
         );
+}
+
+void
+MachineS3c2442::init()
+{
+    s3c24xxinit();
 }
 
 static inline uint32 s3c_readl(volatile uint32 *base, uint32 reg)
@@ -125,6 +131,39 @@ testS3C24xx()
 }
 
 REGMACHINE(MachineS3c2442)
+
+MachineS3c2416::MachineS3c2416()
+{
+    name = "Generic Samsung s3c24xx ARMv5";
+    flushCache = cpuFlushCache_arm926;
+    archname = "s3c2416";
+    CPUInfo[0] = L"SC32416";
+}
+
+void
+MachineS3c2416::init()
+{
+   s3c24xxinit();
+}
+
+int
+MachineS3c2416::preHardwareShutdown(struct fbinfo *fbi)
+{
+    channels = (uint32*)memPhysMap(S3C2410_PA_DMA);
+    uhcmap = (uint32 *)memPhysMap(S3C2410_PA_USBHOST);
+    if (! channels || ! uhcmap)
+        return -1;
+    return 0;
+}
+
+void
+MachineS3c2416::hardwareShutdown(struct fbinfo *fbi)
+{
+    s3c24xxShutdownDMA(channels);
+    ResetUHC(uhcmap);
+}
+
+REGMACHINE(MachineS3c2416)
 
 /****************************************************************
  * S3c64x0 - Tanguy Pruvot on Gmail
